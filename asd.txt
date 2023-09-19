@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Добавление теста</title>
+</head>
+<body>
+<h1>Добавление теста</h1>
+
+<!— Форма для ввода названия теста —>
+<form id="testForm">
+<label for="testName">Название теста:</label>
+<input type="text" id="testName" name="testName" required>
+
+
+<button type="button" onclick="addQuestion()">Добавить вопрос</button>
+
+
+<button type="submit">Сохранить</button>
+</form>
+
+<script>
+let questionCounter = 0;
+
+function addQuestion() {
+questionCounter++;
+
+// Создание элементов формы для ввода вопроса и вариантов ответов
+const form = document.getElementById("testForm");
+const questionDiv = document.createElement("div");
+const questionLabel = document.createElement("label");
+const questionInput = document.createElement("input");
+const answerLabel = document.createElement("label");
+const answerInput1 = document.createElement("input");
+const answerInput2 = document.createElement("input");
+const removeButton = document.createElement("button");
+
+// Настройка атрибутов и содержимого элементов формы
+questionDiv.id = `question${questionCounter}`;
+questionLabel.textContent = `Вопрос ${questionCounter}:`;
+questionInput.type = "text";
+questionInput.name = `question${questionCounter}`;
+answerLabel.textContent = "Варианты ответа:";
+answerInput1.type = "text";
+answerInput1.name = `answer${questionCounter}1`;
+answerInput2.type = "text";
+answerInput2.name = `answer${questionCounter}2`;
+removeButton.textContent = "Удалить";
+removeButton.onclick = function() {
+removeQuestion(questionDiv.id);
+};
+
+// Добавление элементов формы в DOM
+questionDiv.appendChild(questionLabel);
+questionDiv.appendChild(questionInput);
+questionDiv.appendChild(document.createElement("br"));
+questionDiv.appendChild(answerLabel);
+questionDiv.appendChild(document.createElement("br"));
+questionDiv.appendChild(answerInput1);
+questionDiv.appendChild(document.createElement("br"));
+questionDiv.appendChild(answerInput2);
+questionDiv.appendChild(document.createElement("br"));
+questionDiv.appendChild(removeButton);
+form.appendChild(questionDiv);
+}
+
+function removeQuestion(questionId) {
+const questionDiv = document.getElementById(questionId);
+questionDiv.parentNode.removeChild(questionDiv);
+}
+</script>
+</body>
+</html>
+const express = require('express');
+const app = express();
+const moment = require('moment');
+
+// Прописью возвращать значение числа
+app.get('/number/:num', (req, res) => {
+const num = req.params.num;
+const result = numberToWordsConversion(num);
+res.json({ result });
+});
+
+// Решение уравнения ax^2 + bx + c = 0
+app.get('/equation', (req, res) => {
+const a = parseFloat(req.query.a);
+const b = parseFloat(req.query.b);
+const c = parseFloat(req.query.c);
+const result = solveQuadraticEquation(a, b, c);
+res.json({ result });
+});
+
+// Возвращение дня недели по заданной дате
+app.get('/weekday', (req, res) => {
+const dateStr = req.query.date;
+const date = moment(dateStr, 'DD.MM.YYYY').toDate();
+const result = getDayOfWeek(date);
+res.json({ result });
+});
+
+// Возвращение числа Фибоначчи по заданному индексу
+app.get('/fibonacci/:index', (req, res) => {
+const index = parseInt(req.params.index);
+const result = calculateFibonacciNumber(index);
+res.json({ result });
+});
+
+// Возвращение названия региона России по заданному номеру региона
+app.get('/region/:regionId', (req, res) => {
+const regionId = parseInt(req.params.regionId);
+const result = getRegionById(regionId);
+res.json({ result });
+});
+
+// Запуск сервера на локальном хосте
+app.listen(3000, 'localhost', () => {
+console.log('Server is running on http://localhost:3000');
+});
+
+// Функции для каждой API
+
+function numberToWordsConversion(num) {
+// Реализация преобразования числа в слова
+// Вернуть прописью значение числа
+return "Здесь должно быть преобразованное число прописью";
+}
+
+function solveQuadraticEquation(a, b, c) {
+// Реализация решения уравнения
+// Вернуть решение в виде объекта или массива
+return "Здесь должно быть решение уравнения";
+}
+
+function getDayOfWeek(date) {
+// Реализация определения дня недели
+// Вернуть название дня недели
+return "Здесь должен быть день недели";
+}
+
+function calculateFibonacciNumber(index) {
+// Реализация вычисления числа Фибоначчи
+// Вернуть число Фибоначчи
+return "Здесь должно быть число Фибоначчи";
+}
+
+function getRegionById(regionId) {
+// Реализация определения названия региона
+// Вернуть название региона
+return "Здесь должно быть название региона";
+}
+http://localhost:3000
